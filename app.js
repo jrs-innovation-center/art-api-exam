@@ -33,11 +33,9 @@ app.get('/test', function(req, res, next) {
 //CREATE
 app.post('/art/paintings', function(req, res, next) {
   const painting = pathOr(null, ['body'], req)
-  console.log('painting', painting)
   const fieldResults = checkArtFields(painting)
 
   if (fieldResults.length > 0) {
-    console.log('fieldResults', fieldResults)
     return next(
       new HTTPError(400, 'Missing required fields: ', {
         fields: fieldResults
@@ -82,14 +80,12 @@ app.put('/art/paintings/:id', function(req, res, next) {
     'museum'
     // `${keys(museumName)}`
   ])
-  console.log(checkPaintingFields)
 
   const fieldResults = checkPaintingFields(body)
   if (!body || keys(body).length === 0)
     return next(new HTTPError(400, 'Missing painting in request body'))
 
   if (fieldResults.length > 0) {
-    console.log('fieldResults', fieldResults)
     return next(
       new HTTPError(400, 'Missing required fields: ', {
         fields: fieldResults

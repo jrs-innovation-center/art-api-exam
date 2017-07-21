@@ -12,9 +12,7 @@ const test = callback => {
 //CREATE
 function createPainting(painting, callback) {
   const artName = pathOr('', ['name'], painting)
-  console.log('artName', artName)
   const pk = generatePk(`${artName}`)
-  console.log('pk', pk)
 
   painting = assoc('_id', pk, painting)
   painting = assoc('type', 'painting', painting)
@@ -25,7 +23,6 @@ function createPainting(painting, callback) {
 //READ
 
 function findPainting(id, callback) {
-  console.log('DALLLL')
   db.get(id, function(err, doc) {
     if (err) return callback(err)
 
@@ -57,8 +54,6 @@ function deletePainting(id, callback) {
 function listPaintings(filter, lastItem, limit, callback) {
   var query = {}
   if (filter) {
-    console.log('hit if statement')
-
     const arrFilter = split(':', filter)
     const filterField = head(arrFilter)
     const filterValue = last(arrFilter)
