@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const dal = require('./dal')
+const dal = require(`./${process.env.DAL}`)
 const port = process.env.PORT || 4000
 const HTTPError = require('node-http-error')
 const bodyParser = require('body-parser')
@@ -43,6 +43,8 @@ app.post('/art/paintings', function(req, res, next) {
     )
   }
   dal.createPainting(painting, function(err, result) {
+    console.log('app err', err)
+    console.log('app result', result)
     if (err) return next(new HTTPError(err.status, err.message.err))
     res.status(201).send(result)
   })
@@ -54,6 +56,7 @@ app.get('/art/paintings/:id', function(req, res, next) {
 
   if (id) {
     dal.findPainting(id, function(err, doc) {
+      console.log('doc', doc)
       if (err) return next(new HTTPError(err.status, err.message, err))
       res.status(200).send(doc)
     })
@@ -93,7 +96,7 @@ app.put('/art/paintings/:id', function(req, res, next) {
     )
   }
 
-  dal.updatePainting(body, function(err, response) {
+  dal.updatePainting(body, painting, function(err, response) {
     if (err) return next(new HTTPError(err.status, err.message, err))
     res.status(200).send(response)
   })

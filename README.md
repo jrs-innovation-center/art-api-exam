@@ -22,16 +22,34 @@
 
   Look at the **.env-sample** file for a guide.
 
+  The Api is set up to run on two separte database platforms.  One being **SQL** and the other pouchdb.  To set up the api on the pouchdb server use the following from the **.env-sample** file.  
+
   | Value          | Description           
   | -------------  |:-------------:
   | COUCHDB_URL    | This link is composed of your api `key`, `password`, and `base-url`.  
   | COUCHDB_NAME   | This will be the name of your api  
-  | PORT           | This describes the port in which your api will run. The api will start on port 4000 by default.  
+  | PORT           | This describes the port in which your api will run. The api will start on port 4000 by default.
+
+  If you would like a more traditional experience you can use the **SQL** database. Run the `art.sql` file in your **Workbench** to create your database and tables(see[ Load Data]()).  Next set up your environment using the following from the **.env-sample** file.    
+
+  | Value          | Description           
+  | -------------  |:-------------:
+  | DAL            | This sets the Default Dal to `dal-sql.js`.  To switch to the pouch database, in `package.json`, modify the start script to be `dal.js`
+  | PORT           | This describes the port in which your api will run. The api will start on port 4000 by default.
+  | MYSQL_HOST     | If using 'Docker' value will be `0.0.0.0` otherwise use `127.0.0.1`.
+  | MYSQL_PORT     | **Port** shoudld be set to `3306`
+  | MYSQL_USER     | This value contains your personal **SQL Username**
+  | MYSQL_PASSWORD | This value contains your personal **SQL Password**
+  | MYSQL_DATABASE | This value will be `art`
+
+
+
 
   Once correctly set up `yarn start` will start your api.
 
 #### 4. Load data
 
+  PouchDB
   - To load current data via `bulkDocs` located in **load-data.js**:
 
     - Navigate to terminal and type: `yarn load`.  
@@ -42,6 +60,9 @@
   - After loading:
    - `yarn load` to update your database with the new documents
 
+SQL
+- Use the `art.sql` file to load data by loading into **Workbench**.
+
 #### 5. Load indexes
 
   - To load indexes:
@@ -49,7 +70,9 @@
 
 #### 6. Start the API
 
-  Run `yarn start` in your terminal to start the api.  The api will start on port 4000 by default.
+  Run `yarn start` in your terminal to start the api on the **SQL** server.  The api will start on port 4000 by default.
+
+  Run `yarn start-couch` in your terminal to start the api on the **pouchdb** server.  The api wil star on port 4000 by default.
 
 
   *Note- you can view all run scripts in *package.json**
