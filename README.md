@@ -61,7 +61,17 @@
    - `yarn load` to update your database with the new documents
 
 SQL
-- Use the `art.sql` file to load data by loading into **Workbench**.
+- Run these commands to load data if using Docker.
+  ```
+  cd sql-scripts
+  $ mysql < art.sql -u root -p -h 0.0.0.0 -P 3306
+  ```
+
+- If you're not using Docker run this script in your terminal.
+```
+cd sql-scripts
+$ mysql < art.sql -u root -p -h 127.0.0.1 -P 3306
+```
 
 #### 5. Load indexes
 

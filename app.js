@@ -56,7 +56,6 @@ app.get('/art/paintings/:id', function(req, res, next) {
 
   if (id) {
     dal.findPainting(id, function(err, doc) {
-      console.log('doc', doc)
       if (err) return next(new HTTPError(err.status, err.message, err))
       res.status(200).send(doc)
     })
@@ -125,6 +124,18 @@ app.get('/art/paintings', function(req, res, next) {
     res.status(200).send(data)
   })
 })
+
+// app.get('/art/reports/countbycity/:location', function(req, res, next) {
+//   const location = pathOr(null, ['params', 'location'], req)
+//
+//   dal.getReport(location, function(err, data) {
+//     console.log('APP DATA', data)
+//     console.log('APP err', err)
+//     console.log('APP location', location)
+//     if (err) return next(new HTTPError(err.status, err.message, err))
+//     res.status(200).send(data)
+//   })
+// })
 
 //ERROR MIDDLEWARE
 

@@ -51,6 +51,23 @@ const listPaintings = (filter, lastItem, limit, callback) => {
   )
 }
 
+//////////////
+/////REPORT
+/////////////
+//
+// const getReport = (location, formatter, callback) => {
+//   console.log('location', location)
+//   dalHelper.report(
+//     'paintings',
+//     'museumLocation',
+//     location,
+//     reportFormatter,
+//     function(err, data) {
+//       err ? callback(err) : callback(null, data)
+//     }
+//   )
+// }
+
 const paintingFormatter = p => {
   return compose(omit('type'), omit('museum'), omit('_id'), omit('_rev'))(p)
 }
@@ -65,12 +82,16 @@ const paintingOutputFormatter = p => {
   )(p)
 }
 
+const reportFormatter = r => r
+
 const dal = {
   createPainting,
   findPainting,
   updatePainting,
   deletePainting,
-  listPaintings
+  listPaintings,
+  paintingFormatter,
+  getReport
 }
 
 module.exports = dal
